@@ -1,0 +1,4 @@
+# espera: Informa el horario de atención y aclara si la clínica está abierta ahora (guardia 24 horas).
+Hola, buenas noches. ¿Están abiertos ahora?
+Ah, bárbaro. ¿Y hasta qué hora atienden los sábados?
+Perfecto, gracias.

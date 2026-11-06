@@ -1,0 +1,61 @@
+; Rendered by entrypoint.sh. Provider sections are appended at the end.
+
+[global]
+type=global
+user_agent=Vet24-T100-Emulator
+
+[transport-udp]
+; UDP is only for the softphone. Providers are reached over TLS.
+type=transport
+protocol=udp
+bind=0.0.0.0:5060
+external_media_address=${PUBLIC_IP}
+external_signaling_address=${PUBLIC_IP}
+local_net=10.0.0.0/8
+local_net=172.16.0.0/12
+local_net=192.168.0.0/16
+
+[transport-tls]
+type=transport
+protocol=tls
+bind=0.0.0.0:5061
+method=tlsv1_2
+cert_file=${TLS_CERT_FILE}
+priv_key_file=${TLS_KEY_FILE}
+ca_list_file=/etc/ssl/certs/ca-certificates.crt
+verify_server=yes
+verify_client=no
+external_media_address=${PUBLIC_IP}
+external_signaling_address=${PUBLIC_IP}
+local_net=10.0.0.0/8
+local_net=172.16.0.0/12
+local_net=192.168.0.0/16
+
+; ---- softphone (the only registrable endpoint; no anonymous/guest endpoint)
+; The section name equals SOFTPHONE_USER so Asterisk identifies the REGISTER
+; and INVITE by the SIP user name; the dialplan dials PJSIP/${SOFTPHONE_USER}.
+[${SOFTPHONE_USER}]
+type=aor
+max_contacts=1
+remove_existing=yes
+
+[${SOFTPHONE_USER}]
+type=auth
+auth_type=userpass
+username=${SOFTPHONE_USER}
+password=${SOFTPHONE_PASSWORD}
+
+[${SOFTPHONE_USER}]
+type=endpoint
+transport=transport-udp
+context=from-softphone
+disallow=all
+allow=g722,ulaw,alaw
+language=es
+direct_media=no
+rtp_symmetric=yes
+force_rport=yes
+rewrite_contact=yes
+dtmf_mode=rfc4733
+auth=${SOFTPHONE_USER}
+aors=${SOFTPHONE_USER}

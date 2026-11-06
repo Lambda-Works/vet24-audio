@@ -1,0 +1,13 @@
+.env
+.env.tts
+recordings/*
+!recordings/.gitkeep
+prompts/raw/*
+!prompts/raw/.gitkeep
+prompts/asterisk/
+certs/*.pem
+certs/*.key
+certs/*.crt
+!certs/.gitkeep
+__pycache__/
+*.pyc

@@ -1,0 +1,5 @@
+# espera: Prueba de estrés: el agente debe cortar su discurso al ser interrumpido y retomar la conversación sin perder el hilo.
+Hola, buenas noches.
+>Perdón, una pregunta rápida, ¿están abiertos?
+>No, esperá, mejor decime cuánto sale la consulta.
+Listo, gracias.

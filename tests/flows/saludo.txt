@@ -1,0 +1,3 @@
+# espera: El agente saluda, se presenta como asistente de Vet24 y pregunta en qué puede ayudar.
+Hola, buenas noches.
+Nada, quería saber si me atiende alguien.

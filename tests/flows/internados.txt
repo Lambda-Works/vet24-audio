@@ -1,0 +1,3 @@
+# espera: Informa el horario del parte médico de internados y no da información clínica del paciente por teléfono.
+Hola, buenas. Tengo a mi perro internado, ¿a qué hora dan el parte médico?
+Dale, gracias. Un cinco, gracias.

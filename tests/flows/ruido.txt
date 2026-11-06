@@ -1,0 +1,4 @@
+# espera: Prueba de estrés: con ruido de fondo agregado en la conversión, el agente debe entender igual la consulta.
+Hola, buenas noches. ¿Atienden urgencias de madrugada?
+Quería saber cuánto sale la consulta.
+Gracias, un cinco.

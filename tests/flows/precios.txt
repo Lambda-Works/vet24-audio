@@ -1,0 +1,4 @@
+# espera: Responde el valor de la consulta y de la vacuna, o explica de dónde se obtiene el precio vigente, sin inventar montos.
+Hola, quería saber cuánto sale la consulta.
+¿Y la vacuna quíntuple para un cachorro, cuánto está?
+Dale, muchas gracias. Un cinco, gracias.

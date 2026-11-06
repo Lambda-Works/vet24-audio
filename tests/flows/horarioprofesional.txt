@@ -1,0 +1,4 @@
+# espera: Informa el horario del profesional consultado si lo tiene, o indica a quién consultar; no inventa horarios.
+Hola, ¿qué días atiende la doctora de cardiología?
+¿Y a la mañana o a la tarde?
+Gracias, la llamo mañana entonces.

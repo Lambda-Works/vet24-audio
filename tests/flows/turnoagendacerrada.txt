@@ -1,0 +1,4 @@
+# espera: Explica que la agenda de esa especialidad está cerrada y cómo se pide turno (por ejemplo, por el canal habitual del consultorio) sin inventar disponibilidad.
+Hola, quería un turno con el dermatólogo para mi gata.
+Ah, ¿y cómo hago para sacarlo entonces?
+Entendido, gracias.

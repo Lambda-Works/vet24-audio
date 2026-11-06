@@ -1,0 +1,4 @@
+# espera: Registra la queja y los datos de contacto (nombre y teléfono) y confirma que alguien devolverá la llamada.
+Hola, quería dejar un reclamo por una atención que tuvimos la semana pasada.
+Me llamo Marcela Gómez y mi teléfono es tres cuatro uno, cuatro cinco seis, siete ocho nueve cero.
+Sí, por favor que me llamen mañana. Gracias.

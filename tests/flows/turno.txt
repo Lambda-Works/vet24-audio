@@ -1,0 +1,4 @@
+# espera: Ofrece agenda abierta de clínica general, pide datos de la mascota y del tutor y propone o confirma un turno.
+Hola, buenas noches. Quería sacar un turno para mi perro.
+Es para clínica general, un control nomás.
+Se llama Bruno, tiene tres años.
