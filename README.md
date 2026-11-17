@@ -112,7 +112,7 @@ Códigos de marcado desde el softphone (registrar contra `PUBLIC_IP:5060`, UDP):
 | `*98` | Buzón de voz (mailbox 9000). |
 | `600` | Echo, para verificar el audio. |
 
-Para emular las 3 a.m. a cualquier hora, poner `TIME_MODE=night` en `.env` y reiniciar (`docker compose up -d`); `day` fuerza la rama diurna. Los archivos grabados quedan en `recordings/` con el nombre `<proveedor>-<flujo>-<fecha>-<hora>-<id>-{mix,caller,agent}.wav`; pertenecen al usuario del contenedor y son legibles desde el host.
+Para emular las 3 a.m. a cualquier hora, poner `TIME_MODE=night` en `.env` y reiniciar (`docker compose up -d`); `day` fuerza la rama diurna. Los archivos grabados quedan en `recordings/` con el nombre `<proveedor>-<flujo>-<fecha>-<hora>-<id>-{mix,caller,agent}.wav16` (WAV a 16 kHz); pertenecen al usuario del contenedor y son legibles desde el host.
 
 ## Qué mide cada prueba
 

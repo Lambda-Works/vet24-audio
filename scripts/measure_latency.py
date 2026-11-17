@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Measure agent response latency from the separated call recordings.
 
-Finds pairs <base>-caller.wav / <base>-agent.wav in a directory (recursive),
+Finds pairs <base>-caller.wav[16] / <base>-agent.wav[16] in a directory (recursive),
 runs a frame-energy voice activity detector on each track and computes, for
 every caller turn followed by agent speech within 10 s:
 
@@ -158,16 +158,20 @@ def main():
     root = Path(args.directory)
     if not root.is_dir():
         sys.exit(f"error: {root} is not a directory")
-    caller_files = sorted(root.rglob("*-caller.wav"))
-    pairs = [(c, c.with_name(c.name[: -len("-caller.wav")] + "-agent.wav")) for c in caller_files]
-    pairs = [(c, a) for c, a in pairs if a.is_file()]
+    # Asterisk writes 16 kHz WAV as ".wav16"; older recordings are ".wav".
+    pairs = []
+    for ext in (".wav", ".wav16"):
+        for c in sorted(root.rglob(f"*-caller{ext}")):
+            a = c.with_name(c.name[: -len(f"-caller{ext}")] + f"-agent{ext}")
+            if a.is_file():
+                pairs.append((c, a))
     if not pairs:
-        sys.exit(f"error: no <base>-caller.wav / <base>-agent.wav pairs found in {root}")
+        sys.exit(f"error: no <base>-caller.wav[16] / <base>-agent.wav[16] pairs found in {root}")
 
     rows = []
     per_provider = {}
     for caller_path, agent_path in pairs:
-        base = caller_path.name[: -len("-caller.wav")]
+        base = caller_path.name.rsplit("-caller.", 1)[0]
         parts = base.split("-")
         provider = parts[0]
         flow = parts[1] if len(parts) > 1 else ""
