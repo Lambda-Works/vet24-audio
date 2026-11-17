@@ -21,6 +21,7 @@ RUN apt-get update \
         tzdata \
     && ln -snf /usr/share/zoneinfo/$TZ /etc/localtime \
     && echo $TZ > /etc/timezone \
+    && mkdir -p /usr/share/asterisk/moh \
     && rm -rf /var/lib/apt/lists/*
 
 # Asterisk looks for languages under sounds/<lang>; the packages install

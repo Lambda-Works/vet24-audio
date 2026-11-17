@@ -40,7 +40,7 @@ Entrada de llamadas:
 
 ## Requisitos
 
-- VPS Linux en EE.UU. con IP pública, Docker y Docker Compose.
+- VPS Linux con IP pública, Docker y Docker Compose. Se usa el VPS de LambdaWorks en São Paulo (más cerca del recorrido real de la T100 en Rosario que un servidor en EE.UU.). Corre fuera del Hub, clonado en el home del usuario `lambdaworks` (por ejemplo `~/vet24-sip-lab`); las reglas de firewall, el DNS y el certificado los configura un admin del servidor.
 - Puertos abiertos:
   - `5060/udp`: solo desde la IP del softphone.
   - `5061/tcp`: señalización TLS (los proveedores pueden abrir conexiones nuevas hacia esta IP).
@@ -123,7 +123,7 @@ Para emular las 3 a.m. a cualquier hora, poner `TIME_MODE=night` en `.env` y rei
 | REFER a urgencias | Flujo `urgencias`: el agente envía REFER, la llamada cae en `[from-provider]` y suena el softphone. |
 | Desvío al buzón | Dejar un proveedor sin configurar o inalcanzable: tras `PROVIDER_ANSWER_TIMEOUT` la llamada va a `9000@lab`; se escucha con `*98`. |
 | Horario y feriados | `TIME_MODE=auto` con `100`, y fechas de `feriados.txt`; `night` y `day` para forzar la rama. |
-| Latencia | `scripts/lab.sh latency`: respuesta del agente (inicio de su voz menos fin de la del llamante), mediana, p95 y máximo por proveedor. Mide el lado de la central y excluye el tramo Rosario-EE.UU., que se mide en la ventana con el T100. |
+| Latencia | `scripts/lab.sh latency`: respuesta del agente (inicio de su voz menos fin de la del llamante), mediana, p95 y máximo por proveedor. Mide el lado de la central y excluye la diferencia de red entre Rosario y São Paulo, que se mide en la ventana con el T100. |
 | Guion | `suite`: los flujos cubren saludo, horarios, precios, turnos, urgencias, internados, Movet, mensaje, encuesta, interrupciones y ruido. |
 | Voces | `prompts` con distintos `TTS_VOICE`; el flujo `ruido` agrega ruido de fondo en la conversión. |
 
