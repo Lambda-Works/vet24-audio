@@ -147,3 +147,27 @@ Para emular las 3 a.m. a cualquier hora, poner `TIME_MODE=night` en `.env` y rei
 - **Negociación SRTP** por proveedor (SDES, claves en el SDP) y que el proveedor acepte `tlsv1_2` y el SNI.
 - **Endpoint del softphone**: la sección se llama como `SOFTPHONE_USER` (no `softphone`) para que Asterisk lo identifique por usuario SIP.
 - Ownership de `recordings/`: el entrypoint cambia el propietario del directorio al usuario `asterisk` del contenedor.
+
+## Webhook de OpenAI (Hub)
+
+Servicio en `webhook/` (Python, FastAPI) que atiende las llamadas SIP entrantes de OpenAI. Cuando Asterisk marca `sip:<PROJECT_ID>@sip.api.openai.com`, OpenAI envía el webhook `realtime.call.incoming`; el servicio verifica la firma, acepta la llamada (`/accept`), abre el WebSocket Realtime y corre el agente (mismo prompt, saludo y herramientas que el agente de ElevenLabs: `transferir_a_guardia`, `guardar_mensaje`, `terminar_llamada`). Los eventos clave se registran como líneas JSON con `call_id` en stdout (`docker logs`).
+
+Lo despliega el Hub con `docker-compose.prod.yml` en Vet24, entorno `development`: `https://dev.vet24.api.lambdaworks.ar/openai/webhook` (salud: `/health`). El Asterisk del laboratorio sigue levantándose a mano.
+
+Variables de entorno (`.env` del Hub):
+
+| Variable | Descripción |
+| --- | --- |
+| `OPENAI_API_KEY` | Obligatoria. Debe pertenecer al mismo proyecto de OpenAI que el `PROJECT_ID` de la llamada. |
+| `OPENAI_WEBHOOK_SECRET` | Obligatoria. Secreto de firma del webhook (`whsec_...`). |
+| `OPENAI_REALTIME_MODEL` | Opcional, por defecto `gpt-realtime-2.1`. |
+| `OPENAI_REALTIME_VOICE` | Opcional, por defecto `marin`. |
+| `TRANSFER_TARGET_URI` | Opcional, por defecto `sip:urgencias@sip-lab.lambdaworks.ar`. |
+| `PORT` | Opcional, por defecto `3001` (el puerto publicado por compose es 3001). |
+
+Configuración del lado de OpenAI:
+
+1. En el proyecto de OpenAI, crear un webhook para el evento `realtime.call.incoming` apuntando a `https://dev.vet24.api.lambdaworks.ar/openai/webhook`.
+2. Copiar el secreto de firma del webhook a `OPENAI_WEBHOOK_SECRET`.
+3. Poner el id del proyecto en el `.env` del laboratorio como `OPENAI_PROJECT_ID`.
+4. Verificar que `OPENAI_API_KEY` sea de ese mismo proyecto.
