@@ -1,0 +1,9 @@
+{
+  "phone_number_id": "phnum_6301m7mpfnwwewq9fjav9x78py2q",
+  "label": "vet24-lab",
+  "inbound_trunk_config": {
+    "media_encryption": "disabled",
+    "allowed_addresses": ["72.61.50.55/32"],
+    "remote_domains": ["sip-lab.lambdaworks.ar"]
+  }
+}
