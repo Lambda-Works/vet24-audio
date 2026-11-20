@@ -106,11 +106,11 @@ async def handle_call(call_id: str, sip_headers: list[dict]) -> None:
     try:
         async with httpx.AsyncClient() as http:
             resp = await _post(http, call_id, "accept", agent.accept_body(
-                config.OPENAI_REALTIME_MODEL, config.OPENAI_REALTIME_VOICE))
+                config.OPENAI_REALTIME_MODEL, config.OPENAI_REALTIME_VOICE, config.turn_detection()))
             if resp.status_code >= 300:
                 clog(call_id, "accept_failed", status=resp.status_code, body=resp.text[:300])
                 return
-            clog(call_id, "accepted", status=resp.status_code)
+            clog(call_id, "accepted", status=resp.status_code, turn_detection=config.turn_detection())
 
             async with websockets.connect(f"wss://api.openai.com/v1/realtime?call_id={call_id}",
                                           additional_headers=AUTH) as ws:

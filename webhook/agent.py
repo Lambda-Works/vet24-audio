@@ -51,13 +51,16 @@ TOOLS = [
 ]
 
 
-def accept_body(model: str, voice: str) -> dict:
+def accept_body(model: str, voice: str, turn_detection: dict) -> dict:
     """Body for POST /v1/realtime/calls/{call_id}/accept (same shape as a client-secret session)."""
     return {
         "type": "realtime",
         "model": model,
         "instructions": INSTRUCTIONS,
-        "audio": {"output": {"voice": voice}},
+        "audio": {
+            "input": {"turn_detection": turn_detection},
+            "output": {"voice": voice},
+        },
         "tools": TOOLS,
         "tool_choice": "auto",
     }
