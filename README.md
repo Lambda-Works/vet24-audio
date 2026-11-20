@@ -18,7 +18,7 @@ Un contenedor Asterisk 20 hace lo siguiente:
 ## Arquitectura
 
 ```
- Softphone (humano) ──UDP 5060──┐
+ Softphone (humano) ──TLS 5061──┐
                                 │
  Llamante guionado              ▼
  (Local channel, .sln16) ─▶ ┌──────────────────────────┐   TLS 5061 + SRTP    ┌──────────────┐
@@ -42,7 +42,7 @@ Entrada de llamadas:
 
 - VPS Linux con IP pública, Docker y Docker Compose. Se usa el VPS de LambdaWorks en São Paulo (más cerca del recorrido real de la T100 en Rosario que un servidor en EE.UU.). Corre fuera del Hub, clonado en el home del usuario `lambdaworks` (por ejemplo `~/vet24-sip-lab`); las reglas de firewall, el DNS y el certificado los configura un admin del servidor.
 - Puertos abiertos:
-  - `5060/udp`: solo desde la IP del softphone.
+  - `5060/udp`: opcional (UDP heredado, solo desde una IP fija). El softphone usa TLS en el 5061.
   - `5061/tcp`: señalización TLS (los proveedores pueden abrir conexiones nuevas hacia esta IP).
   - `10000-10199/udp`: RTP.
 - Certificado confiable para `LAB_FQDN` (por ejemplo con certbot), copiado como `certs/fullchain.pem` y `certs/privkey.pem`. Sin ellos se genera uno autofirmado: las llamadas salientes funcionan, pero los BYE/REFER que ElevenLabs inicia en una conexión nueva requieren un certificado válido para un FQDN. Tras renovar el certificado, reiniciar el contenedor.
@@ -103,7 +103,7 @@ scripts/lab.sh down
 
 Los flujos están en `tests/flows/*.txt`: las líneas `# espera:` describen el comportamiento esperado del agente, cada otra línea es lo que dice el llamante y el prefijo `>` marca una interrupción (barge-in). Los nombres de flujo usan solo letras `a-z`.
 
-Códigos de marcado desde el softphone (registrar contra `PUBLIC_IP:5060`, UDP):
+Códigos de marcado desde el softphone (registrar contra `LAB_FQDN:5061`, transporte TLS):
 
 | Código | Acción |
 | --- | --- |
@@ -129,7 +129,7 @@ Para emular las 3 a.m. a cualquier hora, poner `TIME_MODE=night` en `.env` y rei
 
 ## Seguridad
 
-- Firewall: `5060/udp` solo desde la IP del softphone (no hay endpoint anónimo, pero conviene no exponerlo); `5061/tcp` y `10000-10199/udp` abiertos. Para OpenAI se pueden restringir los medios a: `13.79.45.80/28`, `23.98.140.64/28`, `40.67.149.176/28`, `40.83.204.240/28`. Para el resto de los proveedores, consultar sus rangos vigentes.
+- Firewall: el softphone se registra por TLS en el `5061`, así que no depende de su IP; `5060/udp` puede quedar cerrado (o solo para una IP fija); `5061/tcp` y `10000-10199/udp` abiertos. Para OpenAI se pueden restringir los medios a: `13.79.45.80/28`, `23.98.140.64/28`, `40.67.149.176/28`, `40.83.204.240/28`. Para el resto de los proveedores, consultar sus rangos vigentes.
 - Usar contraseñas largas y aleatorias para el softphone y el buzón.
 - No subir `.env`, certificados ni grabaciones (están en `.gitignore`).
 - Las grabaciones contienen voz de las pruebas; tratarlas como datos sensibles.

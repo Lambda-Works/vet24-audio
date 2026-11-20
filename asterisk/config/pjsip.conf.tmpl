@@ -5,7 +5,8 @@ type=global
 user_agent=Vet24-T100-Emulator
 
 [transport-udp]
-; UDP is only for the softphone. Providers are reached over TLS.
+; Legacy UDP for a softphone on a fixed IP. The softphone uses TLS by default
+; (its IP changes; 5061 is already open for the providers).
 type=transport
 protocol=udp
 bind=0.0.0.0:5060
@@ -47,7 +48,9 @@ password=${SOFTPHONE_PASSWORD}
 
 [${SOFTPHONE_USER}]
 type=endpoint
-transport=transport-udp
+; TLS: the softphone registers on 5061 and Asterisk reuses that connection
+; to reach it, which works behind home NAT without a per-IP firewall rule.
+transport=transport-tls
 context=from-softphone
 disallow=all
 allow=g722,ulaw,alaw
