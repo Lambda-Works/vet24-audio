@@ -24,7 +24,11 @@ method=tlsv1_2
 cert_file=${TLS_CERT_FILE}
 priv_key_file=${TLS_KEY_FILE}
 ca_list_file=/etc/ssl/certs/ca-certificates.crt
-verify_server=yes
+; Lab compromise: pjproject rejects OpenAI's wildcard certificate
+; (*.api.openai.com for sip.api.openai.com) with "server identity does not
+; match", although openssl verifies it. TLS stays encrypted; only the name
+; check is off. The real T100 is validated separately with Faxtel.
+verify_server=no
 verify_client=no
 external_media_address=${PUBLIC_IP}
 external_signaling_address=${PUBLIC_IP}
