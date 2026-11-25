@@ -1,4 +1,4 @@
-# espera: Informa el horario de atención y aclara si la clínica está abierta ahora (guardia 24 horas).
+# espera: Dice que Mendoza 1960 está abierta ahora (24 hs, todos los días). Los sábados: Mendoza 24 hs y 9 de Julio de 9 a 12:30.
 Hola, buenas noches. ¿Están abiertos ahora?
 Ah, bárbaro. ¿Y hasta qué hora atienden los sábados?
 Perfecto, gracias.
