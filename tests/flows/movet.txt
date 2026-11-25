@@ -1,4 +1,4 @@
-# espera: Menciona el servicio Movet (visitas a domicilio / afiliación) y explica cómo contratarlo o con quién consultar.
+# espera: Aclara que Movet es un servicio aparte y que Vet24 no gestiona afiliaciones, deudas ni visitas de Movet. Deriva a sus canales: WhatsApp 3415960306, su página web o su Instagram.
 Hola, buenas noches. Quería saber si hacen visitas a domicilio.
 ¿Y cómo hago para afiliarme a Movet?
 Genial, gracias.

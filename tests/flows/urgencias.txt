@@ -1,4 +1,4 @@
-# espera: No da consejo médico. Deriva a Urgencias 24 hs, Mendoza 1960, con el texto fijo, y/o transfiere (REFER) a urgencias.
+# espera: No da consejo médico ni transfiere la llamada. Indica que se acerque de inmediato a Mendoza 1960, abierto las 24 hs, y cierra la llamada.
 Hola, por favor, mi perro se comió una barra de chocolate y está vomitando.
 Tiene como cinco meses, es un labrador.
 ¿Qué hago? ¿Lo llevo ya?

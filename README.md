@@ -120,7 +120,7 @@ Para emular las 3 a.m. a cualquier hora, poner `TIME_MODE=night` en `.env` y rei
 | --- | --- |
 | Entrada y códec | `1`/`2`/`3` o `call`; en la CLI, `pjsip show channelstats` y `core show channel` muestran el códec negociado (g722, ulaw o alaw) y SRTP. |
 | Caller ID (From / P-Asserted-Identity) | `pjsip set logger on` y revisar el INVITE: `LAB_CALLER_ID` en From y P-Asserted-Identity. |
-| REFER a urgencias | Flujo `urgencias`: el agente envía REFER, la llamada cae en `[from-provider]` y suena el softphone. |
+| REFER a urgencias | Ya no se usa de noche: ante una urgencia el agente indica ir a Mendoza 1960 y no transfiere. `[from-provider]` queda para probar REFER si hiciera falta. |
 | Desvío al buzón | Dejar un proveedor sin configurar o inalcanzable: tras `PROVIDER_ANSWER_TIMEOUT` la llamada va a `9000@lab`; se escucha con `*98`. |
 | Horario y feriados | `TIME_MODE=auto` con `100`, y fechas de `feriados.txt`; `night` y `day` para forzar la rama. |
 | Latencia | `scripts/lab.sh latency`: respuesta del agente (inicio de su voz menos fin de la del llamante), mediana, p95 y máximo por proveedor. Mide el lado de la central y excluye la diferencia de red entre Rosario y São Paulo, que se mide en la ventana con el T100. |
