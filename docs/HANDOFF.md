@@ -84,6 +84,7 @@ Both providers handled greeting, message taking, barge-in and the urgency transf
 ## Open items / blockers (external)
 1. **Faxtel:** send the 15 questions and get a date for the T100 window (critical path).
 2. **Mercurio:** API docs and credentials. They block the production agent and the WhatsApp bot.
+   - Pending question: where do "pending tasks" for the morning admin staff go? When an agenda is closed, the agent takes DNI, phone, appointment type and desired date/time range, and that must land as a task for admin the next morning. Also confirm which Mercurio agendas the agent may book on (not Geblix).
 3. **Vet24 product definitions:**
    - What the agent may *orient* (reason for visit → specialty) without medical advice. The minimal lab agent sends everything to admin by design.
    - The fixed texts not available from Mercurio (urgencias, Movet, internados report).
