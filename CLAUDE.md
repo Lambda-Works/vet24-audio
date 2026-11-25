@@ -10,8 +10,9 @@ Lab for **Vet24**, a veterinary clinic in Rosario, Argentina. Hub project `Vet24
 
 | Date | Decision |
 | --- | --- |
+| 2026-11-25 | **Production ElevenLabs account belongs to Vet24** (their email, card and spend limit). LambdaWorks creates the account on Vet24's behalf and operates it. The agent is recreated there from `elevenlabs/` with a separate production config. |
 | 2026-11-20 | **Voice provider: ElevenLabs Agents.** Lab median latency 1070 ms vs 1940–2060 ms for OpenAI Realtime, and a more natural voice. |
-| 2026-11-06 | Provider accounts belong to LambdaWorks, with a low spend limit. |
+| 2026-11-06 | Lab provider accounts belong to LambdaWorks, with a low spend limit. |
 | 2026-11-06 | The lab runs by hand on the shared Hub VPS, outside the Hub (see Operations). The user chose this knowing it breaks the "never deploy by hand" rule. |
 | 2026-11-19 | The OpenAI webhook (`webhook/`) is deployed by the Hub to Vet24 development, replacing the prototype. It stays as a reference only; don't extend it unless asked. |
 

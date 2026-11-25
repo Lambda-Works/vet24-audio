@@ -18,6 +18,7 @@ The clinic's system is **Mercurio**. LambdaWorks does not own it; all data is re
 ## Final decisions (do not re-litigate)
 | Date | Decision |
 | --- | --- |
+| 2026-11-25 | **Production ElevenLabs account belongs to Vet24** (their email, card and spend limit). LambdaWorks creates the account on Vet24's behalf and operates it. The agent is recreated there from `elevenlabs/` with a separate production config. |
 | 2026-11-20 | **Voice provider: ElevenLabs Agents.** See the lab results below. |
 | 2026-11-20 | WhatsApp: deterministic buttons for menu and booking, which write to Mercurio. A **cheap LLM (DeepSeek-like)** handles free text only: it classifies and extracts, then hands off to the button flows. Per-conversation cap and daily budget alarm. **Urgencias never go through the LLM** (fixed MENDOZA 1960 24 h text). Raise with the client: DeepSeek means an international personal-data transfer (Ley 25.326). |
 | 2026-11-20 | Channels have **functional parity**, not a shared implementation. Scope = the 10 text-applicable flows in `tests/flows/*.txt`; each `# espera` is the acceptance criterion. |
